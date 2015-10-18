@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div data-ng-controller="eventscontroller as vm">
+    <br />
+    <br />
+    <br />
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="item in vm.eventsItems | orderBy: 'StartDate'">
+                <td><a href="/Event/View/{{item.Id}}">{{item.Name}}</a></td>
+                <td>{{item.Description}}</td>
+                <td>{{item.StartDate | amCalendar }}</td>
+                <td>{{item.EndDate | amCalendar }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <br />
+    <br />
+    <br />
+</div>
+
+@Html.ActionLink("Create Event", "Create", "Event")<br />
+
+
+@section scripts {
+
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script src="~/Scripts/moment-with-locales.min.js"></script>
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-moment.min.js"></script>
+
+    <script src="~/app/app.js"></script>
+    <script src="~/app/events/eventsservice.js"></script>
+    <script src="~/app/events/eventscontroller.js"></script>
+}
