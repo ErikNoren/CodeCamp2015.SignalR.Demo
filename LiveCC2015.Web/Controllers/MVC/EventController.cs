@@ -64,9 +64,11 @@ namespace LiveCC2015.Web.Controllers.MVC
         }
 
         [HttpDelete]
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             var success = eventRepo.DeleteEvent(id);
+            EventsHub.DeletedEvent();
 
             return RedirectToAction("Index");
         }
