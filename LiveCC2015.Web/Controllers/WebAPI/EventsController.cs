@@ -25,18 +25,7 @@ namespace LiveCC2015.Web.Controllers.WebAPI
             return Ok(eventRepo.FindEvent(id));
         }
 
-        public IHttpActionResult Put(Event newEvent)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
-            var result = eventRepo.AddEvent(newEvent);
-            EventsHub.NewEvent();
-
-            return Ok(result);
-        }
-
-        public IHttpActionResult Post(int id, Event updatedEvent)
+        public IHttpActionResult Put(int id, Event updatedEvent)
         {
             if (id != updatedEvent.Id)
                 return BadRequest();
@@ -46,6 +35,17 @@ namespace LiveCC2015.Web.Controllers.WebAPI
 
             var result = eventRepo.UpdateEvent(updatedEvent);
             EventsHub.UpdatedEvent();
+
+            return Ok(result);
+        }
+
+        public IHttpActionResult Post(Event newEvent)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var result = eventRepo.AddEvent(newEvent);
+            EventsHub.NewEvent();
 
             return Ok(result);
         }
