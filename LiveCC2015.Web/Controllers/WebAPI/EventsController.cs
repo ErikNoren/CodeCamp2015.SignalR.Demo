@@ -34,7 +34,7 @@ namespace LiveCC2015.Web.Controllers.WebAPI
                 return BadRequest();
 
             var result = eventRepo.UpdateEvent(updatedEvent);
-            EventsHub.UpdatedEvent();
+            EventsHub.UpdatedEvent(updatedEvent);
 
             return Ok(result);
         }
@@ -45,7 +45,7 @@ namespace LiveCC2015.Web.Controllers.WebAPI
                 return BadRequest();
 
             var result = eventRepo.AddEvent(newEvent);
-            EventsHub.NewEvent();
+            EventsHub.NewEvent(newEvent);
 
             return Ok(result);
         }
@@ -57,7 +57,7 @@ namespace LiveCC2015.Web.Controllers.WebAPI
                 return NotFound();
 
             var success = eventRepo.DeleteEvent(id);
-            EventsHub.DeletedEvent();
+            if (success) EventsHub.DeletedEvent(id);
 
             return Ok(success);
         }

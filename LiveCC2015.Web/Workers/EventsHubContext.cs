@@ -1,4 +1,5 @@
-﻿using LiveCC2015.Web.Controllers.Hubs;
+﻿using LiveCC2015.Data.Models;
+using LiveCC2015.Web.Controllers.Hubs;
 using Microsoft.AspNet.SignalR;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,19 @@ namespace LiveCC2015.Web.Workers
 {
     public class EventsHubContext
     {
-        public void NewEvent()
+        public void NewEvent(Event newEvent)
         {
-            eventsHubContext.Clients.All.NewEvent();
+            eventsHubContext.Clients.All.NewEvent(newEvent);
         }
 
-        public void UpdatedEvent()
+        public void UpdatedEvent(Event updatedEvent)
         {
-            eventsHubContext.Clients.All.UpdatedEvent();
+            eventsHubContext.Clients.All.UpdatedEvent(updatedEvent);
         }
 
-        public void DeletedEvent()
+        public void DeletedEvent(int deletedEventId)
         {
-            eventsHubContext.Clients.All.DeletedEvent();
+            eventsHubContext.Clients.All.DeletedEvent(deletedEventId);
         }
 
         public IHubContext UnderlyingHubContext

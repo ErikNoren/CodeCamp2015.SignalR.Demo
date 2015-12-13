@@ -40,8 +40,8 @@ namespace LiveCC2015.Web.Controllers.MVC
             if (!ModelState.IsValid)
                 return View(updatedEvent);
 
-            var result = eventRepo.UpdateEvent(updatedEvent);
-            EventsHub.UpdatedEvent();
+            eventRepo.UpdateEvent(updatedEvent);
+            EventsHub.UpdatedEvent(updatedEvent);
 
             return RedirectToAction("Index");
         }
@@ -58,7 +58,7 @@ namespace LiveCC2015.Web.Controllers.MVC
                 return View(newEvent);
 
             eventRepo.AddEvent(newEvent);
-            EventsHub.NewEvent();
+            EventsHub.NewEvent(newEvent);
 
             return RedirectToAction("Index");
         }
@@ -68,7 +68,7 @@ namespace LiveCC2015.Web.Controllers.MVC
         public ActionResult Delete(int id)
         {
             var success = eventRepo.DeleteEvent(id);
-            EventsHub.DeletedEvent();
+            if (success) EventsHub.DeletedEvent(id);
 
             return RedirectToAction("Index");
         }
